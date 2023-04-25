@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Native</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      max-width: 280px;
+      height: 260px;
+    }
+
+    .card:hover{
+      cursor: pointer;
+    }
+
+    .card-thumb {
+      height: 200px;
+      width: 280px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .card-description {
+      width: 100%;
+      height: 80px;
+      margin: 0.2rem 0;
+      color: #000;
+      opacity: .7;
+      font-size: 1rem;
+      font-family: sans-serif;
+      line-height: 1.2;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    .card-category {
+      position: absolute;
+      color: white;
+      font-weight: bold;
+      border-radius: 0.2rem;
+      background-color: #66a8e1;
+      font-size: 0.7rem;
+      padding: 0.15rem;
+      bottom: 0.3rem;
+      left: 0.3rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+
+  </main>
+  <script>
+    function loadCardData(path){
+      return fetch(path)
+      .then(response => response.json())
+      .catch(error => console.error(error));
+    }
+
+    function buildCard(cardData) {
+      const card = document.createElement('div');
+      card.classList.add('card');
+
+      const thumb = document.createElement('div');
+      thumb.classList.add('card-thumb');
+
+      const image = document.createElement('img');
+      image.src = cardData.urlImage;
+
+      const category = document.createElement('div');
+      category.classList.add('card-category');
+      category.textContent = cardData.category;
+
+      const title = document.createElement('div');
+      title.classList.add('card-description');
+      title.textContent = cardData.title;
+
+      thumb.appendChild(image);
+      thumb.appendChild(category);
+
+      card.appendChild(thumb);
+      card.appendChild(title);
+
+      return card;
+    }
+
+    const path = 'teste.json';
+
+    loadCardData(path)
+      .then(data => {
+        natives = data.natives;
+        cardData = natives[Math.floor(Math.random() * natives.length)];
+        const card = buildCard(cardData);
+        main = document.querySelector('main');
+        main.appendChild(card);
+      })
+      .catch(error => console.error(error));
+
+
+  </script>
+</body>
+
+</html>
