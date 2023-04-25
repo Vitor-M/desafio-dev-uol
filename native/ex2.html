@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natives 2</title>
+    <style>
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        section {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .title {
+            font-size: 1rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            justify-items: center;
+            gap: 1rem;
+        }
+
+        .card {
+            width: 280px;
+            height: 260px;
+        }
+
+    </style>
+</head>
+<body>
+    <main>
+        <section class="board">
+            <h1 class="title">Conteúdo da Web</h1>
+            <div class="cards-grid">
+                <iframe class="card" src="ex1.html" frameborder="0"></iframe>
+                <iframe class="card" src="ex1.html" frameborder="0"></iframe>
+                <iframe class="card" src="ex1.html" frameborder="0"></iframe>
+                <iframe class="card" src="ex1.html" frameborder="0"></iframe>
+                <iframe class="card" src="ex1.html" frameborder="0"></iframe>
+                <iframe class="card" src="ex1.html" frameborder="0"></iframe>
+            </div>
+        </section>
+    </main>
+  
+</body>
+</html>
