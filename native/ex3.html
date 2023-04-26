@@ -80,6 +80,7 @@
             overlay.style.width = '100%';
             overlay.style.height = '100%';
             overlay.style.opacity = '0.2';
+            overlay.style.visibility = 'hidden';
 
             return overlay;
         }
@@ -111,14 +112,15 @@
                 const emojiBadge = buildBadge(randomEmoji, randomColor)
                 cardThumb.appendChild(emojiBadge);
                 
-                const overlay = buildOverlay(randomColor)
+                const overlay = buildOverlay(randomColor);
+                card.appendChild(overlay);
                 
                 iframe.addEventListener('mouseout', () => {
-                    card.removeChild(overlay);
+                    overlay.style.visibility = 'hidden';
                     card.style.transform = 'scale(1)';
                 });
                 iframe.addEventListener('mouseover', () => {
-                    card.appendChild(overlay);
+                    overlay.style.visibility = 'visible';
                     card.style.transform = 'scale(0.9)';
                 });
             
