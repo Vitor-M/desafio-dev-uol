@@ -55,6 +55,34 @@
         const colors = ['#e166a8', '#66a8e1', '#66e1a8', '#a866e1', '#e16666', '#66e166'];
         const emojis = ['😀', '😎', '🤔', '😂', '👍', '🔥', '🥳', '😜', '🤯'];
         const iframes = document.querySelectorAll('iframe');
+
+        function buildBadge(text, color){
+            const badge = document.createElement('div');
+            badge.textContent = text;
+            badge.style.backgroundColor = color;
+            badge.style.padding = '0.16rem';
+            badge.style.borderRadius = '12px 24px 24px';
+            badge.style.position = 'absolute';
+            badge.style.left = '0.3rem';
+            badge.style.top = '0.3rem';
+            badge.style.fontSize = '1.2rem';
+            badge.style.textAlign = 'center';
+
+            return badge;
+        }
+
+        function buildOverlay(color){
+            const overlay = document.createElement('div');
+            overlay.style.backgroundColor = randomColor;
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.position = 'absolute';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.opacity = '0.2';
+
+            return overlay;
+        }
         
         window.addEventListener('message', (event) => {
             if (event.data === 'cardReady') {
@@ -75,36 +103,16 @@
                 cardImg.addEventListener('load', function () {
                     cardImg.style.backgroundImage = 'none';
                 });
-
                 
                 const cardCategory = iframeDocument.querySelector('.card-category');
-                cardCategory.style.backgroundColor = randomColor;
-
-                const emojiTag = document.createElement('div');
-                emojiTag.textContent = randomEmoji;
-                emojiTag.style.backgroundColor = randomColor;
-                emojiTag.style.padding = '0.16rem';
-                emojiTag.style.borderRadius = '12px 24px 24px';
-                emojiTag.style.position = 'absolute';
-                emojiTag.style.left = '0.3rem';
-                emojiTag.style.top = '0.3rem';
-                emojiTag.style.fontSize = '1.2rem';
-                emojiTag.style.textAlign = 'center';
-                
-                const overlay = document.createElement('div');
-                overlay.style.backgroundColor = randomColor;
-                overlay.style.top = '0';
-                overlay.style.left = '0';
-                overlay.style.position = 'absolute';
-                overlay.style.width = '100%';
-                overlay.style.height = '100%';
-                overlay.style.opacity = '0.2';
-                
+                cardCategory.style.backgroundColor = randomColor;                
                 
                 const cardThumb = iframeDocument.querySelector('.card-thumb');
+                const emojiBadge = buildBadge(randomEmoji, randomColor)
+                cardThumb.appendChild(emojiBadge);
                 
-                cardThumb.appendChild(emojiTag);
-
+                const overlay = buildOverlay(randomColor)
+                
                 iframe.addEventListener('mouseout', () => {
                     card.removeChild(overlay);
                     card.style.transform = 'scale(1)';
