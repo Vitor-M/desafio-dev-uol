@@ -3,9 +3,9 @@ fetch('https://jsonplaceholder.typicode.com/photos')
     .then(data => {
         const randomPhoto = data[Math.floor(Math.random() * data.length)];
 
-        const sameAlbumPhotos = data.filter(photo => photo.albumId === randomPhoto.albumId)
+        const sameAlbumPhotos = data.filter(photo => photo.albumId === randomPhoto.albumId);
 
-        console.log(sameAlbumPhotos)
+        console.log(sameAlbumPhotos);
 
     })
     .catch(error => console.error(error));
