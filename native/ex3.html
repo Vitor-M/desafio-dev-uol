@@ -84,7 +84,7 @@
 
             return overlay;
         }
-        
+
         window.addEventListener('message', (event) => {
             if (event.data === 'cardReady') {
                 const iframe = event.source.frameElement;
@@ -92,29 +92,29 @@
 
                 const randomColor = colors[Math.floor(Math.random() * colors.length)];
                 const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-                
+
                 const card = iframeDocument.querySelector('.card');
                 card.style.border = `2px solid ${randomColor}`;
                 card.style.borderRadius = '6px';
                 card.style.padding = '0.13rem';
-                
+
                 const cardImg = iframeDocument.querySelector('.card-thumb img');
                 cardImg.style.borderRadius = `6px `;
                 cardImg.style.backgroundColor = randomColor;
                 cardImg.addEventListener('load', function () {
                     cardImg.style.backgroundImage = 'none';
                 });
-                
+
                 const cardCategory = iframeDocument.querySelector('.card-category');
                 cardCategory.style.backgroundColor = randomColor;                
                 
                 const cardThumb = iframeDocument.querySelector('.card-thumb');
                 const emojiBadge = buildBadge(randomEmoji, randomColor)
                 cardThumb.appendChild(emojiBadge);
-                
+
                 const overlay = buildOverlay(randomColor);
                 card.appendChild(overlay);
-                
+
                 iframe.addEventListener('mouseout', () => {
                     overlay.style.visibility = 'hidden';
                     card.style.transform = 'scale(1)';
@@ -123,10 +123,10 @@
                     overlay.style.visibility = 'visible';
                     card.style.transform = 'scale(0.9)';
                 });
-            
+
             }
         });
-        
+
     </script>
 </body>
 

@@ -66,58 +66,59 @@
   </style>
 </head>
 <body>
-  <main>
+	<main>
 
-  </main>
-  <script>
-    function loadCardData(path){
-      return fetch(path)
-      .then(response => response.json())
-      .catch(error => console.error(error));
-    }
+	</main>
 
-    function buildCard(cardData) {
-      const card = document.createElement('div');
-      card.classList.add('card');
+	<script>
+		function loadCardData(path){
+			return fetch(path)
+			.then(response => response.json())
+			.catch(error => console.error(error));
+		}
 
-      const thumb = document.createElement('div');
-      thumb.classList.add('card-thumb');
+		function buildCard(cardData) {
+			const card = document.createElement('div');
+			card.classList.add('card');
 
-      const image = document.createElement('img');
-      image.src = cardData.urlImage;
+			const thumb = document.createElement('div');
+			thumb.classList.add('card-thumb');
 
-      const category = document.createElement('div');
-      category.classList.add('card-category');
-      category.textContent = cardData.category;
+			const image = document.createElement('img');
+			image.src = cardData.urlImage;
 
-      const title = document.createElement('div');
-      title.classList.add('card-description');
-      title.textContent = cardData.title;
+			const category = document.createElement('div');
+			category.classList.add('card-category');
+			category.textContent = cardData.category;
 
-      thumb.appendChild(image);
-      thumb.appendChild(category);
+			const title = document.createElement('div');
+			title.classList.add('card-description');
+			title.textContent = cardData.title;
 
-      card.appendChild(thumb);
-      card.appendChild(title);
+			thumb.appendChild(image);
+			thumb.appendChild(category);
 
-      return card;
-    }
+			card.appendChild(thumb);
+			card.appendChild(title);
 
-    const path = 'teste.json';
+			return card;
+		}
 
-    loadCardData(path)
-      .then(data => {
-        natives = data.natives;
-        cardData = natives[Math.floor(Math.random() * natives.length)];
-        const card = buildCard(cardData);
-        main = document.querySelector('main');
-        main.appendChild(card);
-        window.parent.postMessage('cardReady', '*');
-      })
-      .catch(error => console.error(error));
+		const path = 'teste.json';
+
+		loadCardData(path)
+		.then(data => {
+			natives = data.natives;
+			cardData = natives[Math.floor(Math.random() * natives.length)];
+			const card = buildCard(cardData);
+			main = document.querySelector('main');
+			main.appendChild(card);
+			window.parent.postMessage('cardReady', '*');
+			})
+		.catch(error => console.error(error));
 
 
-  </script>
+	</script>
 </body>
 
 </html>
