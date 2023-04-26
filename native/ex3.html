@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natives Bônus</title>
+    <style>
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        section {
+            max-width: 1024px;
+            width: 100%;
+        }
+
+        .title {
+            font-size: 1rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            justify-items: center;
+            gap: 1rem;
+        }
+
+        .card {
+            width: 290px;
+            height: 280px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section class="board">
+            <h1 class="title">Conteúdo da Web</h1>
+            <div class="cards-grid">
+                <iframe class="card" src="ex1.html" frameborder="0"></iframe>
+                <iframe class="card" src="ex1.html" frameborder="0"></iframe>
+                <iframe class="card" src="ex1.html" frameborder="0"></iframe>
+                <iframe class="card" src="ex1.html" frameborder="0"></iframe>
+                <iframe class="card" src="ex1.html" frameborder="0"></iframe>
+                <iframe class="card" src="ex1.html" frameborder="0"></iframe>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const colors = ['#e166a8', '#66a8e1', '#66e1a8', '#a866e1', '#e16666', '#66e166'];
+        const iframes = document.querySelectorAll('iframe');
+        
+        window.addEventListener('message', (event) => {
+            if (event.data === 'cardReady') {
+                const iframe = event.source.frameElement;
+                const iframeDocument = iframe.contentDocument;
+
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+                const card = iframeDocument.querySelector('.card');
+                card.style.border = `2px solid ${randomColor}`;
+                card.style.borderRadius = '6px';
+                card.style.padding = '0.13rem';
+                
+                const cardImg = iframeDocument.querySelector('.card-thumb img');
+                cardImg.style.borderRadius = `6px `;
+                cardImg.style.backgroundColor = randomColor;
+                cardImg.addEventListener('load', function () {
+                    cardImg.style.backgroundImage = 'none';
+                });
+
+                
+                const cardCategory = iframeDocument.querySelector('.card-category');
+                cardCategory.style.backgroundColor = randomColor;
+
+                
+            
+            }
+        });
+        
+    </script>
+</body>
+
+</html>

@@ -112,6 +112,7 @@
         const card = buildCard(cardData);
         main = document.querySelector('main');
         main.appendChild(card);
+        window.parent.postMessage('cardReady', '*');
       })
       .catch(error => console.error(error));
 
